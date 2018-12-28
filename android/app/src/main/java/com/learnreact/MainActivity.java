@@ -37,13 +37,13 @@ public class MainActivity extends ReactActivity {
                 // called once with initial value and again whenver data
                 // at this location is updated
                 String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is " + value);
+                //Log.d(TAG, "Value is " + value);
             }
 
             @Override
             public void onCancelled(DatabaseError error){
                 // failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+               // Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
         // end read msg

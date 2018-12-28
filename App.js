@@ -9,12 +9,14 @@
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import WhatShouldI  from "./src/WhatShouldI.js";
+import Loading from "./src/components/screens/Loading";
+import SignUp from "./src/components/screens/SignUp";
 
 export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <WhatShouldI/>
+        <SignUp />
       </View>
     );
   }
