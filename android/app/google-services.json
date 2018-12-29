@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "2438097639-2la5sdk96c7lqoab5j72v6sqap7tl5bf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.learnreact",
-            "certificate_hash": "52bb2c7584f0088e26a9ae0835348014f1807b4b"
-          }
-        },
-        {
           "client_id": "2438097639-kt8a0a63n5kr9gpqttijkdvt2camjpin.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "2438097639-kt8a0a63n5kr9gpqttijkdvt2camjpin.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

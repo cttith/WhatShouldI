@@ -1,13 +1,17 @@
 import React, {Component} from 'react'
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
-
+import firebase from 'react-native-firebase'
 export default class SignUp extends Component {
     state = { email: '', password: '', errorMessage: null}
 
 
     handleSignUp = () => {
         // TODO: Firebase stuff..
-        console.log('handleSignUp')
+        firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email,this.state.password)
+        .then( () => this.props.navigation.navigate('Home'))
+        .catch(error => this.setState ({ errorMessage: error.message}))
     }
 
     render(){
@@ -24,7 +28,7 @@ export default class SignUp extends Component {
                         </Text>}
                 </View>
                 <View style={{height:80}}>
-                    <Text style={{fontSize:35,textAlign:'center',backgroundColor:"rgb(255,255,255)"}}> WhatShouldI </Text>
+                    <Text style={{fontWeight:'bold',fontSize:35,textAlign:'center',backgroundColor:"rgb(255,255,255),",color:'black'}}> WhatShouldI </Text>
                 </View>
                 <View style={styles.signUpContainer}>
                     <TextInput
