@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 
-export default class Loading extends Component {
+export default class AuthLoading extends Component {
     render(){
         return(
             <View style={[styles.container]}>

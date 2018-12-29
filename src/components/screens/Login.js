@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { StyleSheet, Text, TextInput, View, Button} from 'react-native'
 
 
+
 export default class Login extends Component {
     state = {email: '', password: '', errorMessage:null}
 
@@ -40,7 +41,7 @@ export default class Login extends Component {
                 </View>
                 <View style={styles.buttonContainer}>
                     <Button title="Don't have an account? Sign up"
-                    onPress = {() => this.props.navigation('SignUp')}
+                    onPress = {() => this.props.navigation.navigate('SignUp')}
                     />
                 </View>
             </View>
@@ -71,5 +72,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "rgb(233,233,233)",
         width:"90%",
+        margin:20
     },
 })

@@ -12,12 +12,12 @@ export default class SignUp extends Component {
 
     render(){
         return(
-            <View style={{backgroundColor:"rgb(255,255,255)",flexDirection:'column'}}>
-                <View style={styles.textContainer}>
-                        <Text style={[styles.textColor,{paddingHorizontal:50,paddingTop:25}]} > Sign up to find </Text>
-                        <Text style={[styles.textColor,{paddingHorizontal:25}]} > suggestions of what </Text>
-                        <Text style={[styles.textColor,{paddingHorizontal:40}]} > to do from others </Text>
-                        <Text style={[styles.textColor,{paddingLeft:60}]}>  in your area. </Text>
+            <View style={{flex:1,backgroundColor:"rgb(255,255,255)",flexDirection:'column'}}>
+                <View style={[styles.textContainer,{alignItems:'center'}]}>
+                        <Text style={[styles.textColor,{paddingTop:25}]} > Sign up to find </Text>
+                        <Text style={[styles.textColor]} > suggestions of what </Text>
+                        <Text style={[styles.textColor]} > to do from others </Text>
+                        <Text style={[styles.textColor]}>  in your area. </Text>
                     {this.state.errorMessage &&
                         <Text style={{ color: 'red' }}>
                             {this.state.errorMessage}
@@ -44,7 +44,7 @@ export default class SignUp extends Component {
                     />
                     <View style={styles.buttonContainer}>
                         <Button style={paddingTop=5} title="Sign up" 
-                        onPress={this.handleSignUp.then(() => navigation.navigate('SignedIn'))} />
+                        onPress={this.handleSignUp} />
                     </View>
                     <View style={styles.buttonContainer}>    
                         <Button title="Already have an account? Login"

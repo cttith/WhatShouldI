@@ -5,7 +5,7 @@ import {StackNavigator, TabNavigator, SwitchNavigator} from "react-navigation"
 
 import SignUp from "./screens/SignUp";
 import Login from "./screens/Login";
-import Loading from "./screens/Loading";
+import Loading from "./screens/AuthLoading";
 import Home from "./screens/Home";
 
 const headerStyle = {
