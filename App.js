@@ -6,6 +6,7 @@ import AuthLoading from "./src/components/screens/Auth/AuthLoading";
 import SignUp from "./src/components/screens/Auth/SignUp";
 import Login from "./src/components/screens/Auth/Login";
 import Home from "./src/components/screens/Home";
+import Post from "./src/components/presentation/Post";
 
 // Flow - AUTH https://www.youtube.com/watch?v=EV1kZzt8Lrc
 // root-nav 3.0 https://stackoverflow.com/questions/53367195/invariant-violation-the-navigation-prop-is-missing-for-this-navigator

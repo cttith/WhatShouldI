@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { StyleSheet, Platform, Image, Text, View, Button } from 'react-native'
 import firebase from 'react-native-firebase'
+import  Post  from '../presentation/Post'
 
 export default class Main extends Component {
   state = { currentUser: null }
@@ -16,23 +17,45 @@ export default class Main extends Component {
   }
 
 render() {
-    const { currentUser } = this.state
 return (
       <View style={styles.container}>
+        <View style={styles.tempNav}>
+          <Text style={styles.logo}>WhatShouldI</Text>
+        </View>
+        <Post />
         <Text>
-          Hi {currentUser && currentUser.email}!
+          Hi 
         </Text>
-        <Button title="Sign Out" 
-        onPress = { () => {this.logout()}}
-        />
+        <View style={styles.signOutBtn}>
+          <Button title="Sign Out"
+          style={styles.signOutBtn} 
+          onPress = { () => {this.logout()}}
+          />
+        </View>
       </View>
-    )
+    );
   }
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+    flexDirection:'column',
+  },
+  tempNav:{
+    height:56,
+    justifyContent:'space-between',
+    borderBottomWidth : 1,
+    alignSelf:'stretch',
+  },
+  logo:{
+    fontWeight:'bold',
+    fontSize:30,
+    color:'black',
+    alignSelf: 'center',
+  },
+  signOutBtn:{
+    position:'absolute',
+    bottom:0,
+    width:"100%",
+  },
 })

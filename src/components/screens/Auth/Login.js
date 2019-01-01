@@ -19,7 +19,7 @@ export default class Login extends Component {
     render(){
         return(
             <View style={styles.signInContainer}>
-                <Text style={{fontWeight:'bold',fontSize:30,color:'black',margin:10}}>WhatShouldI</Text>
+                <Text style={styles.logo}>WhatShouldI</Text>
                 {this.state.errorMessage &&
                     <Text style={{ color: 'red' }}>
                         {this.state.errorMessage}
@@ -79,4 +79,10 @@ const styles = StyleSheet.create({
         width:"90%",
         margin:20
     },
+    logo:{
+        fontWeight:'bold',
+        fontSize:30,
+        color:'black',
+        margin:10
+    }
 })
