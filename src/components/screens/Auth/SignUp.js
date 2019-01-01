@@ -6,7 +6,7 @@ export default class SignUp extends Component {
 
 
     handleSignUp = () => {
-        // TODO: Firebase stuff..
+        // TODO: error-validation
         firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email,this.state.password)

@@ -23,9 +23,7 @@ return (
           <Text style={styles.logo}>WhatShouldI</Text>
         </View>
         <Post />
-        <Text>
-          Hi 
-        </Text>
+        <Post/>
         <View style={styles.signOutBtn}>
           <Button title="Sign Out"
           style={styles.signOutBtn} 
