@@ -7,6 +7,7 @@ import SignUp from "./src/components/screens/Auth/SignUp";
 import Login from "./src/components/screens/Auth/Login";
 import Home from "./src/components/screens/Home";
 import Post from "./src/components/presentation/Post";
+import addPost from "./src/components/presentation/addPost";
 
 // Flow - AUTH https://www.youtube.com/watch?v=EV1kZzt8Lrc
 // root-nav 3.0 https://stackoverflow.com/questions/53367195/invariant-violation-the-navigation-prop-is-missing-for-this-navigator
@@ -20,7 +21,7 @@ const AuthStackNavigator = createStackNavigator({
 const rootStackNavigator = createSwitchNavigator({
   AuthLoading: AuthLoading,
   Auth: AuthStackNavigator,
-  Home: Home
+  Home: Home,addPost
 })
 
 const App = createAppContainer(rootStackNavigator)

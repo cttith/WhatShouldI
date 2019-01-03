@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import { StyleSheet, Platform, Image, Text, View, Button, Dimensions } from 'react-native'
-import firebase from 'react-native-firebase'
+import firebase, { config } from 'react-native-firebase'
 
-export default class Main extends Component {
+class Post extends Component {
   state = { currentUser: '', screenWidth:0 }
 
   componentDidMount(){
@@ -30,7 +30,7 @@ return (
             <Text style={styles.userName}>{currentUser.email} </Text>
         </View>
         <Image
-        style={[styles.image,{width:this.state.screenWidth,height:imageHeight}]}
+        style={[{width:this.state.screenWidth,height:imageHeight}]}
         source={{uri: imageUri}}
         />
         <Text> NEED RATING SYSTEM HERE ************* </Text>
@@ -39,27 +39,27 @@ return (
     )
   }
 }
+export default Post;
 
 
 
 const styles = StyleSheet.create({
     postContainer:{
-        flex:0.45,
+        flex:1,
         width:"100%",
         backgroundColor: "rgb(255,255,100)",
-        marginBottom: "3%",
+        marginBottom: "10%",
     },
     userName:{
       alignSelf:'center',
       marginHorizontal:10,  
     },
-    image:{
-        flex:0.7,
-    },
+
     userBar:{
         flexDirection:'row',
-        flex:0.2,
+        width:"100%",
         backgroundColor:"rgb(120,50,120)",
+        height: 50,
     },
     userImg:{
         borderRadius:20,

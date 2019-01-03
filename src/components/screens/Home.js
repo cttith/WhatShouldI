@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
-import { StyleSheet, Platform, Image, Text, View, Button } from 'react-native'
+import { StyleSheet, Platform, Image, Text, View, Button, FlatList } from 'react-native'
 import firebase from 'react-native-firebase'
 import  Post  from '../presentation/Post'
+import addPost from '../presentation/addPost'
+import PostFeed from '../presentation/PostFeed'
 
-export default class Main extends Component {
+class Home extends Component {
   state = { currentUser: null }
 
   componentDidMount(){
@@ -22,9 +24,12 @@ return (
         <View style={styles.tempNav}>
           <Text style={styles.logo}>WhatShouldI</Text>
         </View>
-        <Post />
-        <Post/>
+          <PostFeed/>
         <View style={styles.signOutBtn}>
+          <Button title="Add Post"
+          style={styles.addPostBtn}
+          onPress = { () => this.props.navigation.navigate('addPost')}
+          />
           <Button title="Sign Out"
           style={styles.signOutBtn} 
           onPress = { () => {this.logout()}}
@@ -38,6 +43,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection:'column',
+  },
+  addPostBtn:{
+    position:'absolute',
+    bottom:0,
+    width:"100%",
   },
   tempNav:{
     height:56,
@@ -57,3 +67,5 @@ const styles = StyleSheet.create({
     width:"100%",
   },
 })
+
+export default Home;
