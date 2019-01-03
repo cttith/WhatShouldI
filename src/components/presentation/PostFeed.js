@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList,Text } from "react-native"
+import { FlatList,Text,View,ActivityIndicator } from "react-native"
 import firebase from 'react-native-firebase'
 import Post  from "./Post"
 
@@ -8,39 +8,58 @@ class PostFeed extends React.Component{
     constructor(props){
         super(props);
         this.state = ({
-            posts: []
+            posts: [],
+            loading:true
         });
-        this.ref = firebase.firestore().collection('Posts').get()
-            .then((snapshot) => {
-                snapshot.forEach( (doc) => {
-                    alert(doc.id);
-                });
-            })
-            .catch((err) => {
-                alert('Error getting documents',err);
+        this.unsubscribe = null;
+        this.ref = firebase.firestore().collection('Posts')
+    }
+
+    // grabs docs from firestore and puts in posts array
+    componentDidMount(){
+        this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate)
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
+
+    // will check to see if anything has been added to firestore
+    // RTS
+    onCollectionUpdate = (querySnapshot) => {
+        const posts = [];
+
+        querySnapshot.forEach( (doc) => {
+            const { description, imageUrl } = doc.data();
+            posts.push({
+                key: doc.id,
+                doc, //DocumentSnapShot
+                description,
+                imageUrl,
             });
-    }
-    _renderPost({item}){
-        return <Post/>;
-    }
+        });
 
-    _returnKey(item){
-        return item.toString();
-    }
+        this.setState({
+            posts,
+            loading:false,
+        })
 
+      }
 
     render(){
+        if(this.state.loading){
+            return(
+            <View style={[{flex:1,justifyContent:'center'}]}>
+                <ActivityIndicator size = "large" color="#0000ff" />
+            </View>
+            );
+        }
         return (
             <FlatList
                 data={this.state.posts}
-                keyExtractor = {this._returnKey}
-                renderItem = {this._renderPost}
+                renderItem={ ({item}) => <Post {...item} /> // each {item(doc obj)} from posts array
+            }
             />
-           /*  <FlatList
-            data = {[1,2,3,4,5,6,7,8,9,10]}     // replace w/ firebase storage objects later
-            keyExtractor= {this._returnKey}
-            renderItem={ this._renderPost}
-            /> */
         );
     }
 }

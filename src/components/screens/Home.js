@@ -18,6 +18,7 @@ class Home extends Component {
     .then(() => this.props.navigation.navigate('Login'))
   }
 
+
 render() {
 return (
       <View style={styles.container}>
@@ -25,7 +26,7 @@ return (
           <Text style={styles.logo}>WhatShouldI</Text>
         </View>
         <PostFeed/>
-        <View style={{position:'absolute',bottom:0}}>
+        <View style={{position:'absolute',bottom:0,right:0}}>
           <Button title="Add Post"
           style={styles.addPostBtn}
           onPress = { () => this.props.navigation.navigate('addPost')}

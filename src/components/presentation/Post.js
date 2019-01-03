@@ -3,12 +3,14 @@ import { StyleSheet, Platform, Image, Text, View, Button, Dimensions } from 'rea
 import firebase, { config } from 'react-native-firebase'
 
 class Post extends Component {
-  state = { currentUser: '', screenWidth:0 }
+  state = { currentUser: '', screenWidth:0, imageUri: '' }
 
   componentDidMount(){
     const { currentUser } = firebase.auth()
     this.setState({ currentUser,
-    screenWidth: Dimensions.get("window").width  })
+    screenWidth: Dimensions.get("window").width,
+        
+    })
   }
 
   logout(){
@@ -18,9 +20,10 @@ class Post extends Component {
 
 render() {
     const { currentUser } = this.state
-    const imageHeight = Math.floor(this.state.screenWidth * 1.1);
-    const imageUri = 'https://facebook.github.io/react-native/docs/assets/favicon.png'
-return (
+    const imageHeight = Math.floor(this.state.screenWidth * 1.1);   // aspect ratio on instagram
+    const descrip = this.props.description;
+    const imageUri = this.props.imageUrl
+    return (
     <View style={styles.postContainer}>
         <View style={styles.userBar}>
             <Image
@@ -34,7 +37,7 @@ return (
         source={{uri: imageUri}}
         />
         <Text> NEED RATING SYSTEM HERE ************* </Text>
-        <Text>DESCRIPTION HERE</Text>
+        <Text>{descrip}</Text>
   </View>
     )
   }
