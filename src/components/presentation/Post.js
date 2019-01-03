@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         flex:1,
         width:"100%",
         backgroundColor: "rgb(255,255,100)",
-        marginBottom: "10%",
+        marginBottom: "5%",
     },
     userName:{
       alignSelf:'center',

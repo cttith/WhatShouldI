@@ -24,8 +24,8 @@ return (
         <View style={styles.tempNav}>
           <Text style={styles.logo}>WhatShouldI</Text>
         </View>
-          <PostFeed/>
-        <View style={styles.signOutBtn}>
+        <PostFeed/>
+        <View style={{position:'absolute',bottom:0}}>
           <Button title="Add Post"
           style={styles.addPostBtn}
           onPress = { () => this.props.navigation.navigate('addPost')}

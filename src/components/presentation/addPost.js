@@ -1,9 +1,32 @@
 import React from 'react'
 import {TextInput, Image, View, StyleSheet, Button} from 'react-native'
+import firebase from 'react-native-firebase'
 
 
 export default class addPost extends React.Component{
-    state = { description: ''}
+    //state = { description: '', imageURL: ''}
+
+    constructor() {
+        super();
+        this.ref = firebase.firestore().collection('Posts');
+        this.state = {
+            description: '',
+            imageUrl: ''
+        };
+    }
+
+    addNewPost(){
+        this.ref.add({
+            description: this.state.description,
+            imageUrl: this.state.imageUrl
+        });
+
+        this.setState({
+            description: '',
+            imageUrl: ''
+        })
+        this.props.navigation.navigate('Home')
+    }
 
     render(){
         return(
@@ -15,8 +38,16 @@ export default class addPost extends React.Component{
                     onChangeText={description => this.setState({description})}
                     value={this.state.description}
                 />
+                <TextInput
+                    placeholder="Enter image URL"
+                    autoCapitalize="none"
+                    style={styles.TextInput}
+                    onChangeText={imageUrl => this.setState({imageUrl})}
+                    value={this.state.imageUrl}
+                />
                 <Button 
                     title = "Add Post"
+                    onPress= { () => this.addNewPost()}
                 />
                 <Button
                     title = "Return to feed"
