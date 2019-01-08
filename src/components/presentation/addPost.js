@@ -1,6 +1,7 @@
 import React from 'react'
 import {TextInput, Image, View, StyleSheet, Button} from 'react-native'
 import firebase from 'react-native-firebase'
+import ImagePicker from 'react-native-image-picker'
 
 
 export default class addPost extends React.Component{
@@ -11,14 +12,27 @@ export default class addPost extends React.Component{
         this.ref = firebase.firestore().collection('Posts');
         this.state = {
             description: '',
-            imageUrl: ''
+            imageUrl: '',
+            photo: null,
         };
+    }
+
+    handleChoosePhoto = () => {
+        const options = {
+            noData: true,
+        }
+        ImagePicker.launchImageLibrary(options, response => {
+            alert('response');
+            if(response.uri){
+                this.setState({photo: response})
+            }
+        })
     }
 
     addNewPost(){
         this.ref.add({
             description: this.state.description,
-            imageUrl: this.state.imageUrl
+            imageUrl: this.state.photo.uri
         });
 
         this.setState({
@@ -29,8 +43,15 @@ export default class addPost extends React.Component{
     }
 
     render(){
+        const { photo } = this.state
         return(
-            <View style={{flex:1}}>
+            <View style={{flex:1,alignContent:'center'}}>
+                {photo && (
+                    <Image  
+                        source={{ uri: photo.uri }}
+                        style={{alignSelf:'center', width:300, height:300 }}
+                    />
+                )}
                 <TextInput
                     placeholder="Enter your description here"
                     autoCapitalize="none"
@@ -38,21 +59,22 @@ export default class addPost extends React.Component{
                     onChangeText={description => this.setState({description})}
                     value={this.state.description}
                 />
-                <TextInput
-                    placeholder="Enter image URL"
-                    autoCapitalize="none"
-                    style={styles.TextInput}
-                    onChangeText={imageUrl => this.setState({imageUrl})}
-                    value={this.state.imageUrl}
-                />
-                <Button 
-                    title = "Add Post"
-                    onPress= { () => this.addNewPost()}
-                />
-                <Button
-                    title = "Return to feed"
-                    onPress = { () => this.props.navigation.navigate('Home') }
-                />
+                <View style={styles.buttonContainer}>
+                    <Button
+                        title = "Import photo from library"
+                        style={styles.button}
+                        onPress = { () => this.handleChoosePhoto()}
+                    />
+                    <Button 
+                        title = "Add Post"
+                        style={styles.button}
+                        onPress= { () => this.addNewPost()}
+                    />
+                    <Button
+                        title = "Return to feed"
+                        onPress = { () => this.props.navigation.navigate('Home') }
+                    />
+                </View>
             </View>
         );
     }
@@ -60,12 +82,21 @@ export default class addPost extends React.Component{
 
 const styles = StyleSheet.create({
     TextInput: {
+        alignSelf:'center',
         height: 40,
         width: '90%',
         borderColor: 'gray',
         borderWidth: 1,
         marginTop: 8,
+    }, 
+    buttonContainer:{
+        width:'70%',
+        marginTop:10,
+        alignSelf:'center'
     },
+    button:{
+        color:'red'
+    }
 })
 
 
