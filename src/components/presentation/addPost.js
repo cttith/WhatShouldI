@@ -3,7 +3,6 @@ import {TextInput, Image, View, StyleSheet, Button} from 'react-native'
 import firebase from 'react-native-firebase'
 import ImagePicker from 'react-native-image-picker'
 
-
 export default class addPost extends React.Component{
     //state = { description: '', imageURL: ''}
 
@@ -22,19 +21,36 @@ export default class addPost extends React.Component{
             noData: true,
         }
         ImagePicker.launchImageLibrary(options, response => {
-            alert('response');
             if(response.uri){
                 this.setState({photo: response})
             }
         })
     }
 
-    addNewPost(){
-        this.ref.add({
-            description: this.state.description,
-            imageUrl: this.state.photo.uri
-        });
 
+     uploadImage = (uri, mime = 'application/octet-stream') => {
+        return new Promise((resolve, reject) => {
+            const uploadUri = uri
+            const sessionId = new Date().getTime()
+            let uploadBlob = null
+            const imageRef = firebase.storage().ref().child(uri);
+            console.log("uri = " + uri);
+            console.log("imageRef = " + imageRef.toString())
+            imageRef.putFile(uri, { contentType: mime})
+            .then( () => {
+                imageRef.getDownloadURL().then( (url) => {
+                    this.ref.add({
+                        description: this.state.description,
+                        imageUrl : url
+                    })
+                })
+                
+            })
+        })
+      } 
+
+    addNewPost(){
+        this.uploadImage(this.state.photo.uri)
         this.setState({
             description: '',
             imageUrl: ''

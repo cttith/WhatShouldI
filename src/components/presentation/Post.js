@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { StyleSheet, Platform, Image, Text, View, Button, Dimensions } from 'react-native'
 import firebase, { config } from 'react-native-firebase'
+import { Rating } from 'react-native-elements'
 
 class Post extends Component {
   state = { currentUser: '', screenWidth:0, imageUri: '' }
@@ -32,10 +33,12 @@ render() {
             />
             <Text style={styles.userName}>{currentUser.email} </Text>
         </View>
-        <Image
-        style={[{width:this.state.screenWidth,height:imageHeight}]}
-        source={{uri: imageUri}}
-        />
+        <View style={[{height:imageHeight,backgroundColor:'pink'}]}>
+            <Image
+            style={[{width:this.state.screenWidth,height:imageHeight}]}
+            source={{uri: imageUri}}
+            />
+        </View>
         <Text> NEED RATING SYSTEM HERE ************* </Text>
         <Text>{descrip}</Text>
   </View>
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
     postContainer:{
         flex:1,
         width:"100%",
-        backgroundColor: "rgb(255,255,100)",
+        backgroundColor: "yellow",
         marginBottom: "5%",
     },
     userName:{
@@ -69,5 +72,8 @@ const styles = StyleSheet.create({
         height:40,
         width:40,
         alignSelf:'center'
+    },
+    ratingContainer:{
+        justifyContent:'space-between',
     }
 })

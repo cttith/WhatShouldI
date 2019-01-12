@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "2438097639",
+    "firebase_url": "https://whatshouldi-114d8.firebaseio.com",
+    "project_id": "whatshouldi-114d8",
+    "storage_bucket": "whatshouldi-114d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2438097639:android:1681752ccec87c37",
+        "android_client_info": {
+          "package_name": "com.learnreact"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2438097639-kt8a0a63n5kr9gpqttijkdvt2camjpin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDueZGRums8jtQj4slM996Zy4aPXeqoec"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
