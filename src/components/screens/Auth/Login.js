@@ -33,6 +33,7 @@ export default class Login extends Component {
                     value={this.state.email}
                 />
                 <TextInput
+                    secureTextEntry
                     style={styles.TextInput}
                     autoCapitalize="none"
                     placeholder="Password"

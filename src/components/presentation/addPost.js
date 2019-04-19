@@ -8,11 +8,14 @@ export default class addPost extends React.Component{
 
     constructor() {
         super();
+        const { currentUser } = firebase.auth()
         this.ref = firebase.firestore().collection('Posts');
         this.state = {
             description: '',
             imageUrl: '',
             photo: null,
+            time: null,
+            user: currentUser.email
         };
     }
 
@@ -41,7 +44,9 @@ export default class addPost extends React.Component{
                 imageRef.getDownloadURL().then( (url) => {
                     this.ref.add({
                         description: this.state.description,
-                        imageUrl : url
+                        imageUrl : url,
+                        time: sessionId,
+                        originalPoster: this.state.user
                     })
                 })
                 
@@ -53,7 +58,8 @@ export default class addPost extends React.Component{
         this.uploadImage(this.state.photo.uri)
         this.setState({
             description: '',
-            imageUrl: ''
+            imageUrl: '',
+            time: null,
         })
         this.props.navigation.navigate('Home')
     }

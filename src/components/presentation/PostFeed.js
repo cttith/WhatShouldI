@@ -3,13 +3,14 @@ import { FlatList,Text,View,ActivityIndicator } from "react-native"
 import firebase from 'react-native-firebase'
 import Post  from "./Post"
 
+
 class PostFeed extends React.Component{
 
     constructor(props){
         super(props);
         this.state = ({
             posts: [],
-            loading:true
+            loading:true,
         });
         this.unsubscribe = null;
         this.ref = firebase.firestore().collection('Posts')
@@ -28,15 +29,29 @@ class PostFeed extends React.Component{
     // RTS
     onCollectionUpdate = (querySnapshot) => {
         const posts = [];
-
+        console.log("current user => " + this.state.us)
         querySnapshot.forEach( (doc) => {
-            const { description, imageUrl } = doc.data();
+            const { description, imageUrl, time, originalPoster } = doc.data();
             posts.push({
                 key: doc.id,
                 doc, //DocumentSnapShot
                 description,
                 imageUrl,
+                time,
+                originalPoster
             });
+        });
+
+        posts.forEach ( (doc) => {
+            console.log("post descrip : " + doc.description)
+            console.log("user that posted: " + doc.originalPoster)
+        }
+        );
+
+        posts.sort(function bySessionID(a, b) {
+            return a.time < b.time ? 1
+            : a.time > b.time ? -1 
+            : 0;
         });
 
         this.setState({
@@ -57,7 +72,7 @@ class PostFeed extends React.Component{
         return (
             <FlatList
                 data={this.state.posts}
-                renderItem={ ({item}) => <Post {...item} /> // each {item(doc obj)} from posts array
+                renderItem={ ({item}) => <Post {...item} poster={item.originalPoster} /> // each {item(doc obj)} from posts array
             }
             />
         );

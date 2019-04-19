@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { StyleSheet, Platform, Image, Text, View, Button, Dimensions } from 'react-native'
 import firebase, { config } from 'react-native-firebase'
 import { Rating } from 'react-native-elements'
+import TapRating from '../container/TapRating';
 
 class Post extends Component {
   state = { currentUser: '', screenWidth:0, imageUri: '' }
@@ -10,8 +11,8 @@ class Post extends Component {
     const { currentUser } = firebase.auth()
     this.setState({ currentUser,
     screenWidth: Dimensions.get("window").width,
-        
     })
+
   }
 
   logout(){
@@ -21,7 +22,7 @@ class Post extends Component {
 
 render() {
     const { currentUser } = this.state
-    const imageHeight = Math.floor(this.state.screenWidth * 1.1);   // aspect ratio on instagram
+    const imageHeight = Math.floor(this.state.screenWidth * 1.05);   // aspect ratio on instagram
     const descrip = this.props.description;
     const imageUri = this.props.imageUrl
     return (
@@ -31,16 +32,16 @@ render() {
             style={styles.userImg}
             source={{uri:"https://cdn7.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/87953/89892/Pug-Dog-Card-Party-Face-Mask-available-now-at-starstills__07594.1474580159.jpg?c=2?imbypass=on" }}
             />
-            <Text style={styles.userName}>{currentUser.email} </Text>
+            <Text style={styles.userName}>{this.props.poster} </Text>
         </View>
-        <View style={[{height:imageHeight,backgroundColor:'pink'}]}>
+        <View style={[{height:imageHeight}]}>
             <Image
             style={[{width:this.state.screenWidth,height:imageHeight}]}
             source={{uri: imageUri}}
             />
         </View>
-        <Text> NEED RATING SYSTEM HERE ************* </Text>
-        <Text>{descrip}</Text>
+        <TapRating />
+        <Text style={[{marginBottom: "10%"}]}>{descrip}</Text>
   </View>
     )
   }
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     postContainer:{
         flex:1,
         width:"100%",
-        backgroundColor: "yellow",
+        backgroundColor: "transparent",
         marginBottom: "5%",
     },
     userName:{
@@ -64,16 +65,14 @@ const styles = StyleSheet.create({
     userBar:{
         flexDirection:'row',
         width:"100%",
-        backgroundColor:"rgb(120,50,120)",
+        backgroundColor:"transparent",
         height: 50,
+        
     },
     userImg:{
         borderRadius:20,
         height:40,
         width:40,
-        alignSelf:'center'
+        alignSelf:'center',
     },
-    ratingContainer:{
-        justifyContent:'space-between',
-    }
 })
